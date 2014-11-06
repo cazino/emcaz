@@ -7,15 +7,11 @@ from ..resources import Document
 #
 @view_config(
     renderer='templates/home.pt',
+    content_type='Root',
     )
-def splash_view(request):
-    manage_prefix = request.registry.settings.get('substanced.manage_prefix',
-                                                  '/manage')
-    return {'manage_prefix': manage_prefix}
+def home_view(context, request):
+    return {}
 
-#
-#   "Retail" view for documents.
-#
 @view_config(
     context=Document,
     renderer='templates/document.pt',
