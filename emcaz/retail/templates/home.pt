@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Emmanuel Cazenave - Développeur freelance</title>
+<link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Oswald:700,300|PT+Sans+Caption' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Crete+Round|Parisienne' rel='stylesheet' type='text/css'>
+</head>
+<body lang="fr">
+<div id="shim"></div>
+<div id="content">
+  <div class="watch"></div>
+  <div class="rest">
+    <h1>Emmanuel <span id="cazenave">Cazenave</span><span id="fonction">Développeur freelance</span></h1>
+    <div class="clear"></div>
+    <h2><span>le site arrive</span><br/>bientôt</h2>
+    <p>En attendant n'hésitez pas à me contacter:</p>
+    
+    <ul class="info">
+      <li class="ph">06 60 21 66 27</li>
+      <li class="mail"><a href="mailto:contact@emcaz.fr">contact@emcaz.fr</a></li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

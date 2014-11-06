@@ -6,7 +6,7 @@ from ..resources import Document
 #   Default "retail" view
 #
 @view_config(
-    renderer='templates/splash.pt',
+    renderer='templates/home.pt',
     )
 def splash_view(request):
     manage_prefix = request.registry.settings.get('substanced.manage_prefix',
