@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal">
+  <head>
+    <meta charset="UTF-8">
+    <title>Emmanuel Cazenave - Développeur freelance</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700,300|PT+Sans+Caption' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Crete+Round|Parisienne' rel='stylesheet' type='text/css'>
+  </head>
+  <body lang="fr">
+    <div id="shim"></div>
+    <div id="content">
+      <div class="watch"></div>
+      <div class="rest">
+        <h1>Emmanuel <span id="cazenave">Cazenave</span><span id="fonction">Développeur freelance</span></h1>
+        <div class="clear"></div>
+        <div class="form">${structure: form}</div>
+      </div>
+    </div>
+  </body>
+</html>
