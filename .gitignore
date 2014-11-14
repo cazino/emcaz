@@ -5,3 +5,5 @@ __pycache__
 blobs
 tmp
 ^D
+TODO.txt
+delete-start.sh
