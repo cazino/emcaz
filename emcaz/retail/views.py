@@ -1,7 +1,10 @@
+from datetime import datetime
+
 from deform import Form, ValidationFailure
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import get_renderer
 from pyramid.view import view_config
+from substanced.root import Root
 
 from ..resources import Document
 from .forms import ContactSchema
@@ -26,6 +29,7 @@ def document_view(context, request):
 
 
 @view_config(
+    context=Root,
     name='contact',
     renderer='templates/contact.pt',
 )
@@ -35,8 +39,24 @@ def contactform(context, request):
         controls = request.POST.items()
         try:
             appstruct = form.validate(controls)
+            contact = create_contact(request, appstruct)
+            save_contact(context, contact)
+            return HTTPFound("/thanks")
         except ValidationFailure as e:
             return dict(form=e.render())
 
         return HTTPFound('/thanks')
     return dict(form=form.render())
+
+
+def create_contact(request, appstruct):
+    email = appstruct.get('email')
+    msg = appstruct.get('msg')
+    return request.registry.content.create(
+        'Contact', email, msg, datetime.now())
+
+
+def save_contact(context, contact):
+    contact_name = contact.get_name()
+    contacts = context['contacts']
+    contacts.add(contact_name, contact)

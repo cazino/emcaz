@@ -4,6 +4,7 @@ import deform.widget
 from persistent import Persistent
 
 from substanced.content import content
+from substanced.event import subscribe_created
 from substanced.property import PropertySheet
 from substanced.schema import (
     Schema,
@@ -44,3 +45,14 @@ class Document(Persistent):
     def __init__(self, title='', body=''):
         self.title = title
         self.body = body
+        
+
+@content('Contact')
+class Contact(Persistent):
+    def __init__(self, email='', msg='', dt=''):
+        self.email = email
+        self.msg = msg
+        self.dt = dt
+
+    def get_name(self):
+        return "%s-%s" % (self.email, self.dt.strftime("%d%m%Y-%H:%m:%S"))

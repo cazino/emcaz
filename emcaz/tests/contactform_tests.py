@@ -20,6 +20,7 @@ class ContactFormTest(unittest.TestCase):
     def test_check_email_format(self):
         from emcaz.retail.views import contactform
         context = testing.DummyResource()
+        self.request.registry.content = DummyContent(False)
         self.request.method = 'POST'
         self.request.params['submit'] = True
         self.request.params['email'] = 'invalid'
@@ -27,10 +28,15 @@ class ContactFormTest(unittest.TestCase):
         self.assertIn('Adresse mail invalide', result['form'])
 
     def test_valid_form_redirect_to_thankyou(self):
+        # TODO: chack methods call on mock objects
+        from unittest.mock import Mock
         from emcaz.retail.views import contactform
         from pyramid.httpexceptions import HTTPFound
-
+        mock_contacts = Mock()
         context = testing.DummyResource()
+        context['contacts'] = mock_contacts
+        mock_content = Mock()
+        self.request.registry.content = DummyContent(mock_content)
         self.request.method = 'POST'
         self.request.params['submit'] = True
         self.request.params['email'] = 'dummy@dummmy.com'
@@ -41,3 +47,15 @@ class ContactFormTest(unittest.TestCase):
 
     def tearDown(self):
         testing.tearDown()
+
+
+class DummyContent(object):
+    def __init__(self, result):
+        self.result = result
+
+    def istype(self, *arg, **kw):
+        return self.result
+
+    def create(self, *arg, **kw):
+        self.created_args = (arg, kw)
+        return self.result
