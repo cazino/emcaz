@@ -10,11 +10,15 @@ from substanced.property import PropertySheet
 from substanced.schema import (
     Schema,
     NameSchemaNode
-    )
+)
 from substanced.util import renamer
+
+from emcaz.retail.forms import ContactSchema
+
 
 def context_is_a_document(context, request):
     return request.registry.content.istype(context, 'Document')
+
 
 class DocumentSchema(Schema):
     name = NameSchemaNode(
@@ -46,9 +50,22 @@ class Document(Persistent):
     def __init__(self, title='', body=''):
         self.title = title
         self.body = body
-        
 
-@content('Contact')
+
+class ContactPropertySheet(PropertySheet):
+    schema = ContactSchema()
+
+        
+@content(
+    'Contact',
+    icon='glyphicon glyphicon-book',
+    add_view='add_contact',
+    propertysheets=(
+        ('', ContactPropertySheet),
+    ),
+    catalog=True,
+    tab_order=('properties', 'contents', 'acl_edit'),
+)
 class Contact(Persistent):
     def __init__(self, email='', msg='', dt=''):
         self.email = email
