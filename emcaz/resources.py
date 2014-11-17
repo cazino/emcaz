@@ -2,7 +2,8 @@ import colander
 import deform.widget
 
 from persistent import Persistent
-
+from pyramid_mailer.interfaces import IMailer
+from pyramid_mailer.message import Message
 from substanced.content import content
 from substanced.event import subscribe_created
 from substanced.property import PropertySheet
@@ -56,3 +57,16 @@ class Contact(Persistent):
 
     def get_name(self):
         return "%s-%s" % (self.email, self.dt.strftime("%d%m%Y-%H:%m:%S"))
+
+
+@subscribe_created(Contact)
+def send_contact_notification(event):
+    """ Sends a mail to ... when a contact gets created """
+    mailer = event.registry.getUtility(IMailer)
+    contact = event.object
+    message = Message(
+        subject="Contact to emcaz",
+        sender="robot@emcaz.fr",
+        recipients=["contact@emcaz.fr"],
+        body="%s \n %s" % (contact.email, contact.msg))
+    mailer.send_to_queue(message)
